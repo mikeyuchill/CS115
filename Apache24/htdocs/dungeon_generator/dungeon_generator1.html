@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  function generate_map() {
+    alert('Generate map?');
+    let dungeonName = document.getElementById("dungeon_name");
+    let floor = document.getElementById("floorOutputId");
+    //alert("floor:" + floor.value);
+    let size = document.getElementById("select_size");
+    //alert("e:" + e.value);
+    window.location.replace('dungeon_generator2.html?num_of_floors=' + 
+      floor.value + 
+      '&dungeon_name=' + dungeon_name.value +
+      '&size=' + size.value);
+  }
+</script>
+</head>
+<body>
+<h1>Random Dungeon Generator</h1>
+<form>
+<strong>Dungeon Name:</strong> 
+<input type="text" name="Dungeon Name" id= "dungeon_name" value="My Dungeon"><br>
+
+<strong label for="map size">Map Size</label/strong>
+<select id="select_size">
+  <option value="small">Small</option>
+  <option selected="selected" value="medium">Medium</option>
+  <option value="large">Large</option>
+</select>
+
+<div label for="floors">Number of Floors</label/div>
+<div name="FloorsForm">
+   <input type="range" name="floorInputName" id="floorInputId" value="1" min="1" max="5" oninput="floorOutputId.value = floorInputId.value">
+   <output name="floorOutputName" id="floorOutputId">1</output>
+<br>
+<input type="button" value="Generate" 
+  onclick="generate_map();">
+</div>
+</form>
+  
+</body>
+</html>

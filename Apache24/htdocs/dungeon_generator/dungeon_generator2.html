@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+  }
+  function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+  }
+
+</script>
+</head>
+<body>
+<h1 id="dungeon_title"> </h1>
+<form>
+
+<a id="image_map" href="./dungeon_small_1.jpg" download="dungeon_small_1.jpg">
+</a>
+<br>
+<input type="button" value="Download" onclick="javascript:alert('Download the generated map?');window.location.replace('dungeon_generator1.html')">
+<input type="button" value="Generate Another Map" onclick="javascript:alert('Generate another map?');window.location.replace('dungeon_generator1.html')">
+</form>
+
+
+  
+</body>
+<script>
+ function set_image() {
+  let dungeon_name = getUrlParam('dungeon_name','My Dungeon');
+  let size= getUrlParam('size','small');
+  let width = 100;
+  let height = 100;
+  switch (size) {
+    case "medium":
+       width = 200;
+       height = 200;
+    case "large":
+       width = 300;
+       height = 300;
+  }
+  let num_of_floors= getUrlParam('num_of_floors','1');
+  document.getElementById("dungeon_title").innerHTML=dungeon_name;
+  document.getElementById("image_map").innerHTML="<img src=\"./dungeon_" + size + "_" + num_of_floors +
+   ".jpg\" alt=\"Dungeon\" width=\"" +
+   width + 
+   "\" height=\""+
+   height +
+   "\">";
+ }
+set_image();
+</script>
+</html>
