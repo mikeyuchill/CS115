@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./dungeon_generator.css" />
 <script>
   function generate_map() {
     alert('Generate map?');
@@ -17,27 +18,122 @@
 </script>
 </head>
 <body>
-<h1>Random Dungeon Generator</h1>
-<form>
-<strong>Dungeon Name:</strong> 
-<input type="text" name="Dungeon Name" id= "dungeon_name" value="My Dungeon"><br>
+<header>
+  <h2>Random Dungeon Generator</h2>
+</header>
+<section>
+  <nav>
+      <form>
+          <h2>Parameters</h2>
+          <strong>Dungeon Name:</strong> 
+          <input type="text" name="Dungeon Name" id= "dungeon_name" value="My Dungeon"><br>
+          <style>
+            label {
+              cursor: default;
+            }
+          </style>
+          <style>
+            #multipleMapParams {
+              width: 100%;
+              padding: 50px 0;
+              text-align: center;
+              background-color: white;
+              margin-top: 20px;
+            }
+          </style>
+          <style>
+            arrows {
+              text-decoration: none;
+              display: inline-block;
+              padding: 8px 16px;
+            }
+            
+            arrows:hover {
+              background-color: #ddd;
+              color: black;
+            }
+            
+            .previous {
+              background-color: #f1f1f1;
+              color: black;
+            }
+            
+            .next {
+              background-color: #4CAF50;
+              color: white;
+            }
+            
+            .round {
+              border-radius: 50%;
+            }
+            </style>
+          <div label for="single">Single map</label>
+          <input type="radio" name="maptype" id="single" checked value="single" onClick="openMultipleMap(false)"><br>
+          <label for="multiple">Multiple maps</label>
+          <input type="radio" name="maptype" id="multiple" value="multiple" onClick="openMultipleMap(true)"><br>
+          </div>
+            <div id="multipleMapParams" style="display:none">
+            <div label floors="floors">Number of Floors</label>
+              <name="FloorsForm">
+                <input type="range" name="floorInputName" id="floorInputId" value="1" min="1" max="5" oninput="floorOutputId.value = floorInputId.value">
+                <output name="floorOutputName" id="floorOutputId">1</output>
+              </div>
+          </div>
+          <p><h3>Overall Parameters</h3></p>
+          <div label for="map size">Map size: </label>
+          <select id="select_size">
+            <option value="small">Small</option>
+            <option selected="selected" value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          </div>
+          <strong>Seed:</strong> 
+          <input type="text" name="seed" id= "seed_input"><br>
+          <input type="button" value="Generate" 
+            onclick="generate_map();">
+          </div>
+          </form>
+          
+  </nav>
+  <contentHeader>
+    <div style= "width:70%;float:left;"><h2 style="text-align:center;">Map #</h2></div>
+    <div id = "smallPreview" style= "display:none;float:right;">
+      <canvas id="preview" width="200" height="50" style="border:1px solid #000000;">
+        Your browser does not support the HTML5 canvas tag.
+    
+      </canvas>
+    </div>
+  </h2>
+  </contentHeader>
+  <content>
+      <p>Preview</p>
 
-<strong label for="map size">Map Size</label/strong>
-<select id="select_size">
-  <option value="small">Small</option>
-  <option selected="selected" value="medium">Medium</option>
-  <option value="large">Large</option>
-</select>
+      <arrows href="#" class="previous round">&#8249;</arrows>
+     
+        <canvas id="myCanvas" width="400" height="400" style="border:1px solid #000000;vertical-align:middle;">
+          Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        
+      <arrows href="#" class="next round">&#8250;</arrows>
+  </content>
+</section>
 
-<div label for="floors">Number of Floors</label/div>
-<div name="FloorsForm">
-   <input type="range" name="floorInputName" id="floorInputId" value="1" min="1" max="5" oninput="floorOutputId.value = floorInputId.value">
-   <output name="floorOutputName" id="floorOutputId">1</output>
-<br>
-<input type="button" value="Generate" 
-  onclick="generate_map();">
-</div>
-</form>
-  
+<footer>
+    <p>Log</p>
+</footer>
 </body>
+
+<script>
+    function openMultipleMap(display) {
+      var x = document.getElementById("multipleMapParams");
+      var y = document.getElementById("smallPreview");
+      if (display) {
+        x.style.display = "block";
+        y.style.display = "block";
+      } else {
+        x.style.display = "none";
+        y.style.display = "none";
+      }
+    }
+</script>
 </html>

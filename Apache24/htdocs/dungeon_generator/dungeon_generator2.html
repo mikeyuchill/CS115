@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./dungeon_generator.css" />
 <script>
   function getUrlVars() {
     var vars = {};
@@ -20,18 +21,84 @@
 </script>
 </head>
 <body>
-<h1 id="dungeon_title"> </h1>
-<form>
-
-<a id="image_map" href="./dungeon_small_1.jpg" download="dungeon_small_1.jpg">
-</a>
-<br>
-<input type="button" value="Download" onclick="javascript:alert('Download the generated map?');window.location.replace('dungeon_generator1.html')">
-<input type="button" value="Generate Another Map" onclick="javascript:alert('Generate another map?');window.location.replace('dungeon_generator1.html')">
-</form>
-
-
+<header>
+  <h2>Random Dungeon Generator</h2>
+</header>
+<section>
+  <form>
+      <style>
+          arrows {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+          }
+          
+          arrows:hover {
+            background-color: #ddd;
+            color: black;
+          }
+          
+          .previous {
+            background-color: #f1f1f1;
+            color: black;
+          }
+          
+          .next {
+            background-color: #4CAF50;
+            color: white;
+          }
+          
+          .round {
+            border-radius: 50%;
+          }
+        </style>
+  <nav>
+      <h1 id="dungeon_title"> </h1>
+       
+      <input type="text" name="Dungeon Name" id= "dungeon_name" value="My Dungeon"><br>
+      <div label for="single">Single map</label>
+        <input type="radio" name="maptype" id="single" checked value="single" onClick="openMultipleMap(false)"><br>
+        <label for="multiple">Multiple maps</label>
+        <input type="radio" name="maptype" id="multiple" value="multiple" onClick="openMultipleMap(true)"><br>
+        </div>
+          <div id="multipleMapParams" style="display:none">
+          <div label floors="floors">Number of Floors</label>
+            <name="FloorsForm">
+              <input type="range" name="floorInputName" id="floorInputId" value="1" min="1" max="5" oninput="floorOutputId.value = floorInputId.value">
+              <output name="floorOutputName" id="floorOutputId">1</output>
+            </div>
+        </div>
+        <p><h3>Overall Parameters</h3></p>
+        <div label for="map size">Map size: </label>
+        <select id="select_size">
+          <option value="small">Small</option>
+          <option selected="selected" value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+        </div>
+        <strong>Seed:</strong> 
+      <input type="button" value="Generate" 
+        onclick="generate_map();">
+      </div>    
+  <input type="button" value="Generate Another Map" onclick="javascript:alert('Generate another map?');window.location.replace('dungeon_generator1.html')">
   
+  </nav>
+  <contentHeader>
+    <p><h2>Map #</h2></p>
+  </contentHeader>
+  <content>
+    <a id="image_map" href="./dungeon_small_1.jpg" download="dungeon_small_1.jpg">
+    </a>
+    <br>
+    <input type="button" value="Download" onclick="javascript:alert('Download the generated map?');window.location.replace('dungeon_generator1.html')">   
+  </content>
+  </form>
+</section>
+
+
+<footer>
+    <p>Log</p>
+</footer>  
 </body>
 <script>
  function set_image() {
@@ -57,5 +124,13 @@
    "\">";
  }
 set_image();
+function openMultipleMap(display) {
+    var x = document.getElementById("multipleMapParams");
+    if (display) {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
 </script>
 </html>
